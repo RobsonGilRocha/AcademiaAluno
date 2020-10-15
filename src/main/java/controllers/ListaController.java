@@ -27,12 +27,9 @@ public class ListaController {
 
     private AlunoService alunoService = AlunoService.getInstance();
 
-
     @FXML
     public void initialize() throws SQLException {
-        alunoService.listAlunos();
-
-
+//        alunoService.listAlunos();
 
         idTableNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         idTableData.setCellValueFactory(new PropertyValueFactory<>("nascimento"));
@@ -40,7 +37,7 @@ public class ListaController {
         idTableResponsavel.setCellValueFactory(new PropertyValueFactory<>("responsavel"));
 
         idTableAluno.setPlaceholder(new Label("Nenhum aluno cadastrado."));
-        idTableAluno.setItems(alunoService.alunos);
+        idTableAluno.setItems(alunoService.listAlunos());
 
         idTableAluno.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Aluno>() {
             @Override
@@ -50,6 +47,10 @@ public class ListaController {
         });
     }
 
-    
+    @FXML
+    private void refresh() throws SQLException {
+        idTableAluno.getItems().clear();
+        idTableAluno.setItems(alunoService.listAlunos());
+    }
 
 }

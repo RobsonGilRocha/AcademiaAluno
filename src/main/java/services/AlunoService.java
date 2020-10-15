@@ -4,9 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Aluno;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class AlunoService {
 
@@ -25,13 +23,64 @@ public class AlunoService {
         return instance;
     }
 
-    public boolean adicionarAluno(Aluno aluno){
-        return alunos.add(aluno);
+
+    public boolean addAluno(Aluno aluno) throws SQLException {
+        database = new Database();
+
+        try (PreparedStatement statement =
+                     database.connection.prepareStatement("INSERT INTO alunos (nome, nascimento, sexo, responsavel) VALUES (?, ?, ?, ?)")) {
+            statement.setString(1, aluno.getNome());
+            statement.setDate( 2, Date.valueOf(aluno.getNascimento()));
+            statement.setString(3, String.valueOf(aluno.getSexo()));
+            statement.setString(4, aluno.getResponsavel());
+
+            statement.executeUpdate();
+//            alunos.add(aluno);
+            return true;
+        } catch (SQLException sqlException) {
+            return false;
+        }
     }
+
+
+    public boolean editAluno(String nome , Aluno aluno ) throws SQLException {
+        database = new Database();
+        try (PreparedStatement statement = database.connection.prepareStatement( "UPDATE alunos SET nome = ?, nascimento = ?, sexo = ?, responsavel = ?  where nome = ?")) {
+            statement.setString(1, aluno.getNome());
+            statement.setDate( 2, Date.valueOf(aluno.getNascimento()));
+            statement.setString(3, String.valueOf(aluno.getSexo()));
+            statement.setString(4, aluno.getResponsavel());
+            statement.setString(5, nome);
+
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException sqlException) {
+            return false;
+        }
+
+    }
+/*
     public boolean removerAluno(String nome) {
         Aluno aluno = findAlunoByNome((nome));
         return alunos.remove(aluno);
+    } */
+    public boolean removerAluno(String nome) throws SQLException {
+        database = new Database();
+        Aluno aluno = findAlunoByNome((nome));
+
+
+        try (PreparedStatement statement = database.connection.prepareStatement("DELETE FROM alunos where nome = ?")) {
+            statement.setString(1, nome);
+
+            statement.executeUpdate();
+           // return true;
+            return alunos.remove(aluno);
+        } catch (SQLException sqlException) {
+            return false;
+        }
     }
+
+
 
     public ObservableList<Aluno> listAlunos() throws SQLException {
         database = new Database();
@@ -63,6 +112,7 @@ public class AlunoService {
 
         return null;
     }
+    /*
     public boolean editAluno(String nome, Aluno aluno) {
         for (int i = 0; i < alunos.size(); i++) {
             if (alunos.get(i).getNome().equalsIgnoreCase(nome)) {
@@ -72,7 +122,7 @@ public class AlunoService {
             }
         }
         return false;
-    }
+    }*/
 
 
     /*Aluno

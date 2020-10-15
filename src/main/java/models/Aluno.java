@@ -46,7 +46,7 @@ public class Aluno {
         this.responsavel = responsavel;
         return this;
     }
-    @Override
+    /*@Override
     public String toString() {
         return "Aluno{" +
                 "nome='" + nome + '\'' +
@@ -54,22 +54,6 @@ public class Aluno {
                 ", sexo='" + sexo + '\'' +
                 ", responsavel='" + responsavel +
                 '}';
-    }
+    }*/
 
-
-/*  Aluno
-- nome (String)
-- data de nascimento (LocalDate)
-- sexo (char)
-- nome do responsável (String) (se for menor que 18 anos)
-
-    O sistema tem uma lista de alunos (ObservableList)
-
-    O sistema deve cadastrar e listar os alunos
-
-    Para o cadastro
-    Voces já sabem
-
-    Para a lista
-    Usar TableView */
 }

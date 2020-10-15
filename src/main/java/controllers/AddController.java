@@ -72,7 +72,7 @@ public class AddController {
             aluno.setSexo(String.valueOf(idChoiceBoxSexo.getValue()).charAt(0));
             aluno.setResponsavel(idTextResponsavel.getText());
 
-            boolean success = alunoService.adicionarAluno(aluno);
+            boolean success = alunoService.addAluno(aluno);
 
             if(success) {
                 clearFields();

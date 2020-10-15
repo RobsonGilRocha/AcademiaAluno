@@ -1,14 +1,14 @@
 package controllers;
 
+import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import services.AlunoService;
 import models.Aluno;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -38,53 +38,77 @@ public class FindController {
         idDatePickerEdit.valueProperty().addListener((observable, oldValue, newValue) -> {
             long age = newValue.until(LocalDate.now(), ChronoUnit.YEARS);
             if(age >= 18){
-               // idLabelResponsavel.setDisable(true);
                 idTextFieldEditResp.setDisable(true);
             } else {
-               // idLabelResponsavel.setDisable(false);
                 idTextFieldEditResp.setDisable(false);
             }
         });
-
     }
-
-
-
-    public void onBusca() {
+    public void onBusca() throws SQLException {
         System.out.println(" oi apertou o botao busca ");
         Aluno aluno = alunoService.findAlunoByNome(idTextFieldBusca.getText());
         idSexoR.setText(String.valueOf(aluno.getSexo()));
         idDataR.setText(String.valueOf(aluno.getNascimento()));
         idResponsavelR.setText(String.valueOf(aluno.getResponsavel()));
 
-
-        //System.exit(0);
     }
 
-    public void onRemover(ActionEvent event) {
+    public void onRemover(ActionEvent event) throws SQLException {
         Aluno aluno = alunoService.findAlunoByNome(idTextFieldBusca.getText());
         alunoService.removerAluno(idTextFieldBusca.getText());
-        idSexoR.setText(" ");
-        idDataR.setText(" ");
-        idResponsavelR.setText(" ");
-        idTextFieldBusca.setText(" Aluno removido ");
+        idSexoR.setText("");
+        idDataR.setText("");
+        idResponsavelR.setText("");
+        idTextFieldBusca.setText("");
+        boolean success = alunoService.editAluno(idTextFieldBusca.getText(),aluno );
+
+        if (success) {
+            Alert alert = new Alert(
+                    Alert.AlertType.INFORMATION,
+                    "Kick ass Aluno.",
+                    ButtonType.OK
+            );
+            alert.setHeaderText("Aluno removido com sucesso");
+            alert.showAndWait();
+        }
+
+        JFXPanel btnSave = null;
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
 
     }
-
-    public void onEdit(ActionEvent event) {
+    public void onEdit(ActionEvent event) throws SQLException {
         Aluno aluno = alunoService.findAlunoByNome(idTextFieldBusca.getText());
-        alunoService.removerAluno(idTextFieldBusca.getText());
-        idSexoR.setText(" ");
-        idDataR.setText(" ");
-        idResponsavelR.setText(" ");
-        idTextFieldBusca.setText(" Aluno Editado ");
-
 
         aluno.setNome(idTextFieldEdit.getText());
         aluno.setNascimento(idDatePickerEdit.getValue());
         aluno.setSexo(String.valueOf(idChoiceBoxEdit.getValue()).charAt(0));
         aluno.setResponsavel(idTextFieldEditResp.getText());
 
-        boolean success = alunoService.adicionarAluno(aluno);
+        boolean success = alunoService.editAluno(idTextFieldBusca.getText(),aluno );
+
+        idSexoR.setText("");
+        idDataR.setText("");
+        idResponsavelR.setText("");
+        idTextFieldBusca.setText("");
+
+        if (success) {
+            Alert alert = new Alert(
+                    Alert.AlertType.INFORMATION,
+                    "Reborn Aluno.",
+                    ButtonType.OK
+
+            );
+            alert.setHeaderText("Aluno alterado com sucesso");
+            alert.showAndWait();
+        }
+
+        JFXPanel btnSave = null;
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
+
+
+
+
     }
 }
