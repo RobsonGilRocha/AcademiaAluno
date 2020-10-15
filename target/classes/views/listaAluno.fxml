@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListaController">
    <children>
+      <Button layoutX="240.0" layoutY="420.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
       <TableView fx:id="idTableAluno" prefHeight="400.0" prefWidth="500.0">
         <columns>
           <TableColumn fx:id="idTableNome" prefWidth="160.0" text="Nome" />
