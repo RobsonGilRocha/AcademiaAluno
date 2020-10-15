@@ -7,9 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import models.Academia;
+import services.AlunoService;
 import models.Aluno;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class ListaController {
@@ -24,18 +25,22 @@ public class ListaController {
     @FXML
     private TableView<Aluno> idTableAluno = new TableView<>();
 
-    private Academia academia = Academia.getInstance();
+    private AlunoService alunoService = AlunoService.getInstance();
 
 
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
+        alunoService.listAlunos();
+
+
+
         idTableNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         idTableData.setCellValueFactory(new PropertyValueFactory<>("nascimento"));
         idTableSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
         idTableResponsavel.setCellValueFactory(new PropertyValueFactory<>("responsavel"));
 
         idTableAluno.setPlaceholder(new Label("Nenhum aluno cadastrado."));
-        idTableAluno.setItems(academia.alunos);
+        idTableAluno.setItems(alunoService.alunos);
 
         idTableAluno.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Aluno>() {
             @Override

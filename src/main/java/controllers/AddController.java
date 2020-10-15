@@ -3,7 +3,7 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import models.Academia;
+import services.AlunoService;
 import models.Aluno;
 
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ public class AddController {
     public Label idMsg;
 
 
-    private final Academia academia = Academia.getInstance();
+    private final AlunoService alunoService = AlunoService.getInstance();
 
 
 
@@ -72,7 +72,7 @@ public class AddController {
             aluno.setSexo(String.valueOf(idChoiceBoxSexo.getValue()).charAt(0));
             aluno.setResponsavel(idTextResponsavel.getText());
 
-            boolean success = academia.adicionarAluno(aluno);
+            boolean success = alunoService.adicionarAluno(aluno);
 
             if(success) {
                 clearFields();

@@ -1,20 +1,26 @@
-package models;
+package services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import models.Aluno;
 
-public class Academia {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-    private static Academia instance;
+public class AlunoService {
+
+    private static AlunoService instance;
+    Database database;
     public ObservableList<Aluno> alunos;
 
-    private Academia() {
+    private AlunoService() {
         this.alunos = FXCollections.observableArrayList();
     }
 
-    public static synchronized Academia getInstance(){
+    public static synchronized AlunoService getInstance(){
         if (instance == null) {
-            instance = new Academia();
+            instance = new AlunoService();
         }
         return instance;
     }
@@ -26,6 +32,28 @@ public class Academia {
         Aluno aluno = findAlunoByNome((nome));
         return alunos.remove(aluno);
     }
+
+    public ObservableList<Aluno> listAlunos() throws SQLException {
+        database = new Database();
+
+        try (
+                Statement statement = database.connection.createStatement();
+                ResultSet rs = statement.executeQuery("select * from alunos")
+                ) {
+                    while (rs.next()) {
+                        Aluno aluno = new Aluno();
+                        aluno.setNome(rs.getString("nome"));
+                        aluno.setNascimento(rs.getDate("nascimento").toLocalDate());
+                        aluno.setSexo(rs.getString("sexo").charAt(0));
+                        aluno.setResponsavel(rs.getString("responsavel"));
+
+                        alunos.add(aluno);
+                    }
+                    database.shutdown();
+                    return alunos;
+        }
+    }
+
     public Aluno findAlunoByNome(String nome) {
         for (Aluno aluno : alunos) {
             if (aluno.getNome().equals(nome)) {

@@ -6,7 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import models.Academia;
+import services.AlunoService;
 import models.Aluno;
 
 import java.time.LocalDate;
@@ -30,7 +30,7 @@ public class FindController {
     @FXML
     private Label idResponsavelR;
     @FXML
-    Academia academia = Academia.getInstance();
+    AlunoService alunoService = AlunoService.getInstance();
 
     @FXML
     public void initialize() {
@@ -52,7 +52,7 @@ public class FindController {
 
     public void onBusca() {
         System.out.println(" oi apertou o botao busca ");
-        Aluno aluno = academia.findAlunoByNome(idTextFieldBusca.getText());
+        Aluno aluno = alunoService.findAlunoByNome(idTextFieldBusca.getText());
         idSexoR.setText(String.valueOf(aluno.getSexo()));
         idDataR.setText(String.valueOf(aluno.getNascimento()));
         idResponsavelR.setText(String.valueOf(aluno.getResponsavel()));
@@ -62,8 +62,8 @@ public class FindController {
     }
 
     public void onRemover(ActionEvent event) {
-        Aluno aluno = academia.findAlunoByNome(idTextFieldBusca.getText());
-        academia.removerAluno(idTextFieldBusca.getText());
+        Aluno aluno = alunoService.findAlunoByNome(idTextFieldBusca.getText());
+        alunoService.removerAluno(idTextFieldBusca.getText());
         idSexoR.setText(" ");
         idDataR.setText(" ");
         idResponsavelR.setText(" ");
@@ -72,8 +72,8 @@ public class FindController {
     }
 
     public void onEdit(ActionEvent event) {
-        Aluno aluno = academia.findAlunoByNome(idTextFieldBusca.getText());
-        academia.removerAluno(idTextFieldBusca.getText());
+        Aluno aluno = alunoService.findAlunoByNome(idTextFieldBusca.getText());
+        alunoService.removerAluno(idTextFieldBusca.getText());
         idSexoR.setText(" ");
         idDataR.setText(" ");
         idResponsavelR.setText(" ");
@@ -85,6 +85,6 @@ public class FindController {
         aluno.setSexo(String.valueOf(idChoiceBoxEdit.getValue()).charAt(0));
         aluno.setResponsavel(idTextFieldEditResp.getText());
 
-        boolean success = academia.adicionarAluno(aluno);
+        boolean success = alunoService.adicionarAluno(aluno);
     }
 }
