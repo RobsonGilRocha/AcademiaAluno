@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListaController">
+   <children>
+      <TableView fx:id="idTableAluno" prefHeight="400.0" prefWidth="500.0">
+        <columns>
+          <TableColumn fx:id="idTableNome" prefWidth="160.0" text="Nome" />
+          <TableColumn fx:id="idTableData" prefWidth="94.0" text="Data" />
+            <TableColumn fx:id="idTableSexo" prefWidth="69.0" text="Sexo" />
+            <TableColumn fx:id="idTableResponsavel" prefWidth="175.0" text="Responsável" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>

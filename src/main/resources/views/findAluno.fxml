@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FindController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="5.0" layoutY="10.0" text="Nome" />
+      <Label layoutX="5.0" layoutY="40.0" text="Data" />
+      <Label layoutX="5.0" layoutY="70.0" text="Sexo" />
+      <Label layoutX="5.0" layoutY="100.0" text="Responsavel" />
+      <Label fx:id="idDataR" layoutX="90.0" layoutY="40.0" text="Resultado Data" />
+      <Label fx:id="idSexoR" layoutX="90.0" layoutY="70.0" text="Resultado Sexo" />
+      <Label fx:id="idResponsavelR" layoutX="90.0" layoutY="100.0" text="Resultado Responsavel" />
+      <TextField fx:id="idTextFieldBusca" layoutX="90.0" layoutY="2.0" onAction="#onBusca" />
+      <Button fx:id="idBotaoBusca" layoutY="130.0" mnemonicParsing="false" onAction="#onBusca" text="Busca" />
+      <Button layoutX="260.0" layoutY="130.0" mnemonicParsing="false" onAction="#onEdit" text="Editar e salvar" />
+      <ChoiceBox fx:id="idChoiceBoxEdit" layoutX="260.0" layoutY="60.0" prefWidth="150.0" />
+      <DatePicker fx:id="idDatePickerEdit" layoutX="260.0" layoutY="30.0" />
+      <TextField fx:id="idTextFieldEdit" layoutX="260.0" layoutY="2.0" />
+      <TextField fx:id="idTextFieldEditResp" layoutX="260.0" layoutY="90.0" />
+      <Button layoutX="120.0" layoutY="130.0" mnemonicParsing="false" onAction="#onRemover" text="Remover aluno" />
+   </children>
+</AnchorPane>

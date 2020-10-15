@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddController">
+   <children>
+      <Label layoutX="10.0" layoutY="12.0" text="Nome do Aluno">
+         <font>
+            <Font name="Fira Code Regular" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="idBotaoA" layoutX="350.0" layoutY="350.0" mnemonicParsing="false" onAction="#onBotaoA" text="Salvar">
+         <font>
+            <Font name="Fira Code Regular" size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="idTextNome" layoutX="250.0" layoutY="10.0" />
+      <Label layoutX="10.0" layoutY="50.0" text="Data de Nascimento">
+         <font>
+            <Font name="Fira Code Regular" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="88.0" text="Sexo">
+         <font>
+            <Font name="Fira Code Regular" size="18.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="idChoiceBoxSexo" layoutX="250.0" layoutY="86.0" prefWidth="150.0" />
+      <DatePicker fx:id="idDataPicker" layoutX="250.0" layoutY="45.0" />
+      <Label fx:id="idLabelResponsavel" disable="true" layoutX="10.0" layoutY="130.0" text="Nome do Responsável">
+         <font>
+            <Font name="Fira Code Regular" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="idTextResponsavel" disable="true" layoutX="250.0" layoutY="125.0" />
+      <Button fx:id="idBotaoB" layoutX="350.0" layoutY="300.0" mnemonicParsing="false" onAction="#onBotaoB" text="Limpar">
+         <font>
+            <Font name="Fira Code Regular" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="idMsg" layoutX="19.0" layoutY="217.0" textAlignment="CENTER">
+         <font>
+            <Font name="Fira Code Regular" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
